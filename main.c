@@ -102,7 +102,7 @@ int main(int argc, char *argv[])
 
     // The following lines (and every code already present in this skeleton) can be removed, it is just an example to show you how to use the program arguments
     fprintf(stderr, "\tnumber of threads executing the RLC decoding algorithm in parallel: %" PRIu32 "\n", args.nb_threads);
-    fprintf(stderr, "\verbose mode: %s\n", args.verbose ? "enabled" : "disabled");
+    fprintf(stderr, "\tverbose mode: %s\n", args.verbose ? "enabled" : "disabled");
 
     // This is an example of how to open the instance files of the input directory. You may move/edit it during the project
     struct dirent *directory_entry;
@@ -155,6 +155,10 @@ int main(int argc, char *argv[])
 		// Do not forget that we use byte values, so we have to
 		// cast the uint32_t returned value to only keep the last 8 bits.
 		uint8_t coef = (uint8_t)tinymt32_generate_uint32(&prng);
+        if (args.verbose)
+        {
+            printf("Coefficient: %u\n", coef);
+        }
 
         // Close this instance file
         fclose(input_file);
