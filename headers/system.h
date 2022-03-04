@@ -16,18 +16,17 @@ typedef struct
  * @param symbol_size: size of the two symbols (of the same size!)
  * @return: a new vector of `symbol_size` byte containing the result of symbol_1 + symbol_2 in GF(256)
  */
-uint8_t *gf256_add_two_vectors(uint8_t *symbol_1, uint8_t *symbol_2, uint32_t symbol_size);
+uint8_t *gf_256_full_add_vector(uint8_t *symbol_1, uint8_t *symbol_2, uint32_t symbol_size);
 
 /**
  *
- * Add two vectors in a Galois Field 256 where the second vector is scaled
- * @param symbol_1: the first symbol to add
- * @param symbol_2: the second symbol to add (the scaled one)
+ * Multiply a vector by a coefficient in a Galois Field 256
+ * @param symbol: the symbol to multiply
  * @param coef: the coefficient of the scaling
- * @param symbol_size: size of the two symbols (of the same size!)
- * @return: a new vector of `symbol_size` byte containing the result of symbol_1 + symbol_2 * coef in GF(256)
+ * @param symbol_size: size of the symbol
+ * @return: a new vector of `symbol_size` byte containing the result of symbol * coef in GF(256)
  */
-uint8_t *gf256_add_two_vectors_scaled(uint8_t *symbol_1, uint8_t *symbol_2, uint8_t coef, uint32_t symbol_size);
+uint8_t *gf_256_mul_vector(uint8_t *symbol, uint8_t coef, uint32_t symbol_size);
 
 /**
  *
@@ -35,9 +34,9 @@ uint8_t *gf256_add_two_vectors_scaled(uint8_t *symbol_1, uint8_t *symbol_2, uint
  * @param symbol: the symbol to add
  * @param coef: the dividing coefficient
  * @param symbol_size: size of the two symbols (of the same size!)
- * @return: a new vector of `symbol_size` byte containing the result of symbol_1 / coef
+ * @return: a new vector of `symbol_size` byte containing the result of symbol / coef
  */
-uint8_t *gf256_divide_vector_scaled(uint8_t *symbol, uint8_t coef, uint32_t symbol_size);
+uint8_t *gf_256_inv_vector(uint8_t *symbol, uint8_t coef, uint32_t symbol_size);
 
 /**
  *
