@@ -142,19 +142,19 @@ int main(int argc, char *argv[])
         
         // You may modify or delete the following lines. This is just an example of how to use tinymt32
         uint32_t seed = 42; // Replace with the seed from the instance file!
-		
-		tinymt32_t prng;
-		memset(&prng, 0, sizeof(tinymt32_t));
-		// Do not modify these values!
-		prng.mat1 = 0x8f7011ee;
-		prng.mat2 = 0xfc78ff1f;
-		prng.tmat = 0x3793fdff;
-		tinymt32_init(&prng, seed);
-		
-		// You can generate coefficients by calling this function
-		// Do not forget that we use byte values, so we have to
-		// cast the uint32_t returned value to only keep the last 8 bits.
-		uint8_t coef = (uint8_t)tinymt32_generate_uint32(&prng);
+        
+        tinymt32_t prng;
+        memset(&prng, 0, sizeof(tinymt32_t));
+        // Do not modify these values!
+        prng.mat1 = 0x8f7011ee;
+        prng.mat2 = 0xfc78ff1f;
+        prng.tmat = 0x3793fdff;
+        tinymt32_init(&prng, seed);
+
+        // You can generate coefficients by calling this function
+        // Do not forget that we use byte values, so we have to
+        // cast the uint32_t returned value to only keep the last 8 bits.
+        uint8_t coef = (uint8_t)tinymt32_generate_uint32(&prng);
         if (args.verbose)
         {
             printf("Coefficient: %u\n", coef);
