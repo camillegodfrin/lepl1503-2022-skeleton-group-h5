@@ -46,7 +46,7 @@ uint8_t *gf_256_inv_vector(uint8_t *symbol, uint8_t coef, uint32_t symbol_size);
  * @param symbol_size: size of the independent terms
  * @param system_size: the size of the system (i.e., number of rows/columns)
  */
-void gf256_gaussian_elimination(uint8_t **A, uint8_t **b, uint32_t symbol_size, uint32_t system_size);
+void gf_256_gaussian_elimination(uint8_t **A, uint8_t **b, uint32_t symbol_size, uint32_t system_size);
 
 /**
  *
