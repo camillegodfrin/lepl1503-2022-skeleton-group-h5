@@ -1,0 +1,48 @@
+# Documentation
+
+Ce petit document explique comment créer un projet sur la forge UCLOUVAIN. 
+Le document décrit ensuite comment établir le lien avec Jenkins. 
+
+
+## Création du projet sur la forge
+
+1. Se connecter sur https://forge.uclouvain.be => Sign in with UCLouvain SSO
+1. Dans Utilisateur => Settings, soit:
+   - Préciser un mot de passe dans l'onglet Password
+   - Ajouter une clé SSH publique dans l'onglet SSH keys
+1. Créer un groupe
+1. Dans l'onglet Members, rajouter l'utilisateur ``jenkins_ingi`` avec au moins le rôle Maintainer, ainsi que les autres membres du groupes.
+1. Dans la vue de Group, cliquer sur New project. Choisir un nom de projet et l'initialiser avec un README.
+1. Dans la vue du projet, un item indique _Auto DevOps enabled_. Il faut le désactiver.
+   Pour cela, cliquer sur l'item ou aller dans l'onglet Settings => CI/CD. A coté de Auto DevOps, cliquer sur Expand et décocher
+   la case _Default to Auto DevOps pipeline_
+1. Dans le menu _CI/CD_ => _Pipelines_, annuler les éventuels pipelines en attente.
+1. Le projet est créé. Le dépôt git peut désormais être cloné. Dans la vue principale, en haut à droite, se trouve un bouton _Clone_.
+   Il donne l'addresse du dépôt selon que vous avez configuré un accès via mot de passe ou clé SSH.
+
+## Création du projet sur Jenkins
+
+1. Se connecter sur https://jenkins.student.info.ucl.ac.be => _S'identifier_
+1. Une fois connecté, dans le menu à gauche, cliquer sur _Nouvel Item_
+1. Saisir le nom du projet et choisir _Projet free-style_
+1. Le menu de configuration s'ouvre. Cliquer sur _Activer la sécurité basée projet_.
+   Ajouter les membres du projet et leur donner tous les droits. Attention à ne pas donner tous les droits aux anonymes !
+1. Dans le menu _GitLab Connection_, choisir _Forge UCLouvain_.
+1. Dans _Gestion de code source_, choisir l'option _Git_. Indiquer l'URL du dépôt git _Clone with SSH_ et choisir _ git (SSH key - jenkins_ingi - forge.uclouvain.be)_ comme identifiant
+1. Dans _Ce qui déclenche le build_, cocher _Build when a change is pushed to GitLab_. **Mettez de côté le _web hook URL_ précisé juste à côté.**
+   Un cadre s'ouvre, cliquer sur le bouton _Avancé_. En dessous du champ _Secret token_ se trouve un bouton _Generate_. **Générer un token et le mettre de côté.**
+1. Dans _Build_, ajouter une étape _Exécuter un script shell_. Y introduire
+
+        #!/bin/bash
+        exit 0
+
+1. Dans _Actions à la suite du build_, ajouter une action _Publish status to GitLab_. Le projet peut désormais être construit une fois.
+
+## Déclenchement automatique des builds
+
+1. Sur GitLab, dans la vue du projet, aller dans le menu _Settings_ => _Integrations_.
+2. Copier le _web hook URL_ ainsi que le _Secret token_ mis de côté au point précédent. Cocher _Push events_ et finalement cliquer sur _Add webhook_.
+
+Au prochain commit, un build sera déclenché automatiquement. Comme le script shell retourne 0, le build passera tout le temps. 
+Si le lien est fonctionnel, une pastille verte s'affichera à côté de la description du commit dans GitLab.
+
