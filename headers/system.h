@@ -30,11 +30,11 @@ uint8_t *gf_256_mul_vector(uint8_t *symbol, uint8_t coef, uint32_t symbol_size);
 
 /**
  *
- * Divide a vector in a Galois Field 25§ by a coefficient
+ * Divide a vector in a Galois Field 256 by a coefficient
  * @param symbol: the symbol to add
  * @param coef: the dividing coefficient
  * @param symbol_size: size of the two symbols (of the same size!)
- * @return: a new vector of `symbol_size` byte containing the result of symbol / coef
+ * @return: a new vector of `symbol_size` byte containing the result of symbol / coef in GF(256)
  */
 uint8_t *gf_256_inv_vector(uint8_t *symbol, uint8_t coef, uint32_t symbol_size);
 
